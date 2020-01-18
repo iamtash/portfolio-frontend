@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Home from './components/Home'
-import Dashboard from './components/Dashboard'
+import { getRoutes } from './components/getRoutes'
+import { connect } from 'react-redux'
+
 
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/dashboard" component={Dashboard} />
-        </Switch>
-        </Router>
+        {getRoutes(this.props.currentUser)}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
 
-
-export default App;
+export default connect(mapStateToProps)(App);
