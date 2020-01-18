@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { login } from '../actions/login'
 import { connect } from 'react-redux'
 
@@ -19,33 +18,20 @@ class Login extends Component {
     handleSubmit = event => {
         event.preventDefault()
         const { email, password } = this.state
-        axios.post("http://localhost:3001/sessions", {
-            user: { email, password }
-        }, { withCredentials: true }
-        ).then(response => {
-            this.clientLogin(response.data)
-        }
-        ).catch(error => console.log('login error', error))
-    }
-
-    clientLogin = data => {
-        if (data.logged_in) {
-            const { id, email } = data.user
-            this.props.login({ id, email })
-        } else {
-            this.setState({
-                email: "",
-                password: ""
-            })
-        }
+        this.props.login({email, password})
+        this.setState({
+            email: "",
+            password: ""
+        })
     }
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+            <div className="float-right">
+                <form className="form-inline" onSubmit={this.handleSubmit}>
                     <input 
                         type="email" 
+                        className="form-control"
                         name="email" 
                         placeholder="email" 
                         value={this.state.email}
@@ -55,6 +41,7 @@ class Login extends Component {
 
                     <input 
                         type="password" 
+                        className="form-control"
                         name="password" 
                         placeholder="password" 
                         value={this.state.password}
@@ -62,7 +49,7 @@ class Login extends Component {
                         required
                     />
                 
-                <button type="submit">Login</button>
+                <button type="submit" className="btn btn-secondary">Login</button>
                 </form>
             </div>
         )
