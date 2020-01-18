@@ -2,21 +2,26 @@ export default function loginReducer(
     state = {
         loggedIn: null,
         id: null,
-        email: ""
+        email: "",
+        authenticating: false
     }, action) {
         switch (action.type) {
-            case 'USER_LOGIN':
-                console.log('logging user in', {
+            case 'LOGGING_IN':
+                return {
                     ...state,
-                    loggedIn: true,
-                    id: action.user.id,
-                    email: action.user.email
-                })
+                    loggedIn: state.loggedIn,
+                    id: state.id,
+                    email: state.email,
+                    authenticating: true
+                }
+            case 'USER_LOGIN':
+                console.log('persisting logged in user to store')
                 return {
                     ...state,
                     loggedIn: true,
                     id: action.user.id,
-                    email: action.user.email
+                    email: action.user.email,
+                    authenticating: false
                 }
             case 'USER_LOGOUT':
                 return {
