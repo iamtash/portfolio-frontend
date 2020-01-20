@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { Component } from 'react'
 import AdminDashboard from '../components/AdminDashboard'
 import GuestDashboard from '../components/GuestDashboard'
 import { connect } from 'react-redux'
 
-const DashboardContainer = ({currentUser}) => {
-    return(
-        <div>
-            Dashboard Container
-            {currentUser.loggedIn? <AdminDashboard /> : <GuestDashboard />}
-        </div>
-    )
+class DashboardContainer extends Component {
+    render() { 
+        const { currentUser, projects } = this.props   
+        return(
+            <div>
+                Dashboard Container
+                {currentUser.loggedIn ? <AdminDashboard projects={projects} /> : <GuestDashboard projects={projects} />}
+            </div>
+        )
+    }
+
 }
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        projects: state.projects
     }
 }
 
