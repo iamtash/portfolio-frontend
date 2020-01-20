@@ -1,11 +1,11 @@
 import React from 'react'
-import Login from './Login'
+import DashboardContainer from '../containers/DashboardContainer'
 
-const Home = () => {
+const Home = props => {
     return(
-        <div>
+        <div className="container-fluid">
             Home
-            <Login />
+            <DashboardContainer />
         </div>
     )
 }
