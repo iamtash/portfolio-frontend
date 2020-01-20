@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import humps from 'humps'
+import { addProject } from '../actions/projects'
 
 class ProjectInput extends Component {
     state = {
@@ -20,23 +19,19 @@ class ProjectInput extends Component {
     handleSubmit = event => {
         event.preventDefault()
         console.log(this.state)
-        const { title, githubUrl, demoUrl, description } = this.state
-        axios.post("http://localhost:3001/projects", humps.decamelizeKeys({
-            project: { 
-                title, 
-                githubUrl, 
-                demoUrl, 
-                description 
-            }
-        }), 
-        ).then(response => console.log('post project resp', response))
-         .catch(error => console.log('post project error', error))
+        this.props.addProject(this.state)
+        this.setState({
+            title: "",
+            githubUrl: "",
+            demoUrl: "",
+            description: ""
+        })
     }
 
     render() {
-        return (<div >
+        return (<div className="container">
             <h1>New Project</h1>
-            <form onSubmit={this.handleSubmit} className="form-group" style={{width: '50%'}}>
+            <form onSubmit={this.handleSubmit} className="form-group">
                 <input 
                     className="form-control"
                     onChange={this.handleChange}
@@ -80,4 +75,4 @@ class ProjectInput extends Component {
     }
 }
 
-export default ProjectInput
+export default connect(undefined, { addProject })(ProjectInput)
