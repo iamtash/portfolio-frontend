@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { getRoutes } from './components/getRoutes'
+import Dashboard from './components/Dashboard'
+import Home from './components/Home'
+import ProjectsContainer from './containers/ProjectsContainer'
+import About from './components/About'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getProjects } from './actions/projects'
 
@@ -9,20 +13,20 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, projects } = this.props
     return (
-      <div className="app">
-        {getRoutes(currentUser, projects)}
-      </div>
+      <Router>
+          <div className="app">
+            <Dashboard />
+          </div>
+
+        <Route exact path="/" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/projects" component={ProjectsContainer} />
+        
+      </Router>
+
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser,
-    projects: state.projects
-  }
-}
-
-export default connect(mapStateToProps, { getProjects })(App);
+export default connect(undefined, { getProjects })(App);
