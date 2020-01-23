@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { login } from '../actions/login'
 import { connect } from 'react-redux'
 import { Form, FormControl, Button } from 'react-bootstrap'
 
-class Login extends Component {
+class Login extends PureComponent {
     state = {
         email: "",
-        password: "",
-        loginErrors: ""
+        password: ""
     }
 
     handleChange = event => {
