@@ -1,31 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { likeProject } from '../actions/projects'
 import CardContent from './CardContent'
 
-class GuestProjectCard extends Component {
-    handleLike = id => {
-        this.props.likeProject(id)
+const GuestProjectCard = props => {
+    const handleLike = id => {
+        props.likeProject(id)
     }
 
-    render() {
-        const { id, likes } = this.props
-        return (
-            <div className="card">
-                <div className="card-body">
-                    <CardContent {...this.props} />
+    const button = <button className="btn btn-primary float-right" onClick={() => handleLike(props.id)}>Like</button>
 
-                    <button 
-                        type="button" 
-                        className="btn btn-primary float-right"
-                        onClick={() => this.handleLike(id)}
-                    >Like</button>
-                     <p className="card-text small">Likes: {likes}</p>
-                </div>
-            </div>
-        )
-    }
-
+    return (
+        <>
+            <CardContent {...props} buttons={button} />
+            <br />
+        </>
+    )
 }
 
 export default connect(undefined, { likeProject })(GuestProjectCard)

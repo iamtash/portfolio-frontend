@@ -1,12 +1,21 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
 
-const CardContent = ({title, description, githubUrl, demoUrl}) => {
+const CardContent = ({ id, title, description, githubUrl, demoUrl, likes, buttons }) => {
     return (
         <>
-            <h4 className="card-title">{title}</h4>
-            <p className="card-text">{description}</p>
-            <a href={githubUrl} className="card-link">Github</a>
-            <a href={demoUrl} className="card-link">Demo</a>
+            <Card>
+                <Card.Body>
+                    <Card.Title><h4>{title}</h4></Card.Title>
+                    <Card.Text>{description}</Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                    <Card.Link href={githubUrl}>Github</Card.Link>
+                    <Card.Link href={demoUrl}>Demo</Card.Link>
+                    {buttons}
+                     <Card.Text className="small">Likes: {likes}</Card.Text>
+                </Card.Footer>
+            </Card>
         </>
     )
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { deleteProject } from '../actions/projects'
 import EditProject from './EditProject'
 import CardContent from './CardContent'
+import { Card } from 'react-bootstrap'
 
 class AdminProjectCard extends Component {
 
@@ -26,33 +27,45 @@ class AdminProjectCard extends Component {
         })
     }
 
-    renderCard = () => {
-        const { id } = this.props
-        return (
-            <>
-                <CardContent {...this.props} />
-                <button 
-                    className="btn btn-secondary float-right"
-                    onClick={() => this.handleDelete(id)}
-                >Delete</button>
-                <button 
-                    className="btn btn-primary float-right"
-                    onClick={() => this.handleEdit(id)}
-                >Edit</button>
-            </>
-        )
-    }
+    buttons = (
+        <>
+            <button 
+                className="btn btn-secondary float-right"
+                onClick={() => this.handleDelete(this.props.id)}
+            >Delete</button>
+            <button 
+                className="btn btn-primary float-right"
+                onClick={() => this.handleEdit(this.props.id)}
+            >Edit</button>
+        </>
+    )
+
+
+    card = (
+        <>
+            <CardContent {...this.props} buttons={this.buttons} />
+            <br />
+        </>
+    )
+
+    editor = (
+        <>
+            <Card>
+                <Card.Body>
+                    <EditProject editing={this.props} closeEditor={this.closeEditor} /> 
+                </Card.Body>
+            </Card>
+            <br />
+        </>
+    )
 
     render() {
       return (
-            <div className="card">
-                <div className="card-body">
-                    {this.state.editing ? <EditProject editing={this.props} closeEditor={this.closeEditor} /> : this.renderCard()}
-                </div>
-            </div>
+            <>
+                {this.state.editing ? this.editor : this.card}
+            </>
       )
     }
-
 }
 
 export default connect(undefined, { deleteProject })(AdminProjectCard)
