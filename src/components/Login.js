@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { login } from '../actions/login'
 import { connect } from 'react-redux'
+import { Form, FormControl, Button } from 'react-bootstrap'
 
 class Login extends Component {
     state = {
@@ -27,31 +28,29 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="float-right">
-                <form className="form-inline" onSubmit={this.handleSubmit}>
-                    <input 
-                        type="email" 
-                        className="form-control"
-                        name="email" 
-                        placeholder="email" 
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        required
-                    />
+            <Form inline onSubmit={this.handleSubmit}>
+                <FormControl 
+                    type="email" 
+                    className="mr-sm-2"
+                    name="email" 
+                    placeholder="email" 
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                    required
+                />
 
-                    <input 
-                        type="password" 
-                        className="form-control"
-                        name="password" 
-                        placeholder="password" 
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        required
-                    />
+                <FormControl
+                    type="password" 
+                    className="mr-sm-2"
+                    name="password" 
+                    placeholder="password" 
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    required
+                />
                 
-                <button type="submit" className="btn btn-secondary">Login</button>
-                </form>
-            </div>
+                <Button variant="outline-info">Login</Button>
+            </Form>
         )
     }
 }
