@@ -16,8 +16,7 @@ class Login extends Component {
         })
     }
 
-    handleSubmit = event => {
-        event.preventDefault()
+    handleSubmit = () => {
         const { email, password } = this.state
         this.props.login({email, password})
         this.setState({
@@ -28,7 +27,7 @@ class Login extends Component {
 
     render() {
         return (
-            <Form inline onSubmit={this.handleSubmit}>
+            <Form inline>
                 <FormControl 
                     type="email" 
                     className="mr-sm-2"
@@ -49,7 +48,7 @@ class Login extends Component {
                     required
                 />
                 
-                <Button variant="outline-info">Login</Button>
+                <Button variant="outline-info" onClick={this.handleSubmit}>Login</Button>
             </Form>
         )
     }
