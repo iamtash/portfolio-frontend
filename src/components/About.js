@@ -1,14 +1,13 @@
 import React from 'react'
-import Avatar from "../media/avatar.png"
+import avatar from "../sprites/avatar.png"
+import { Container, Image } from 'react-bootstrap'
 
 const About = () => {
     return (
-        <div>
-            <div className="container">
-                <h1>About Me</h1>
-                <img src={Avatar} alt="avatar" className="rounded float-left" style={{width: '25%'}} />
-            </div>
-        </div>
+        <Container style={{marginTop: '20px'}}>
+            <h1>About Me</h1>
+            <Image src={avatar} rounded style={{width: '25%'}} />
+        </Container>
     )
 }
 
