@@ -1,12 +1,12 @@
 import React from 'react'
-import DashboardContainer from '../containers/DashboardContainer'
+import { Container } from 'react-bootstrap'
 
-const Home = props => {
+const Home = () => {
     return(
-        <div className="container-fluid">
-            Home
-            <DashboardContainer />
-        </div>
+        <Container style={{marginTop: '20px'}}>
+            <h1>plz hire me</h1>
+        </Container>
+        
     )
 }
 
