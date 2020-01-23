@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import { addProject } from '../actions/projects'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
+import ProjectForm from './ProjectForm'
 
 class ModalForm extends Component {
     state = { 
@@ -44,7 +45,8 @@ class ModalForm extends Component {
                 </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="form-group">
+                    <ProjectForm {...this.state} handleChange={this.handleChange} />
+                    {/* <form className="form-group">
                         <input 
                             className="form-control"
                             onChange={this.handleChange}
@@ -81,7 +83,7 @@ class ModalForm extends Component {
                             placeholder="Description"
                             required
                         />
-                    </form>
+                    </form> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>

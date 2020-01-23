@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { editProject } from '../actions/projects'
+import ProjectForm from './ProjectForm'
 
 class EditProject extends Component {
     constructor(props) {
@@ -15,58 +16,21 @@ class EditProject extends Component {
         })
     }
 
-    handleSubmit = event => {
-        event.preventDefault()
+    handleSubmit = () => {
         this.props.editProject(this.state)
-        this.props.handleUpdate()
+        this.props.closeEditor()
     }
 
     render() {
         return (
-        <div className="container" style={{marginTop: '20px'}}>
-            
-            <h4>Edit Project</h4>
-            <form onSubmit={this.handleSubmit} className="form-group">
-                <input 
-                    className="form-control"
-                    onChange={this.handleChange}
-                    type="text"
-                    name="title"
-                    value={this.state.title}
-                    placeholder="Title"
-                    required
-                />
-                <input 
-                    className="form-control"
-                    onChange={this.handleChange}
-                    type="text"
-                    name="githubUrl"
-                    value={this.state.githubUrl}
-                    placeholder="Github URL"
-                    required
-                />
-                <input 
-                    className="form-control"
-                    onChange={this.handleChange}
-                    type="text"
-                    name="demoUrl"
-                    value={this.state.demoUrl}
-                    placeholder="Demo URL"
-                />
-
-                <textarea
-                    className="form-control"
-                    onChange={this.handleChange}
-                    name="description"
-                    value={this.state.description}
-                    placeholder="Description"
-                    required
-                />
-                <button className="btn btn-primary">Update</button>
-                <button className="btn btn-secondary" onClick={this.props.handleUpdate}>Cancel</button>
-            </form>
-        </div>
-            
+            <div className="container">      
+                <h4>Edit Project</h4>
+                <ProjectForm {...this.state} handleChange={this.handleChange} />
+                
+                <button className="btn btn-primary" onClick={this.handleSubmit}>Update</button>
+                <button className="btn btn-secondary" onClick={this.props.closeEditor}>Cancel</button>
+                
+            </div>            
         )
     }
 }

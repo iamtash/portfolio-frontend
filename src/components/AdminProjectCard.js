@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteProject } from '../actions/projects'
-import ProjectInput from './EditProject'
+import EditProject from './EditProject'
 import CardContent from './CardContent'
 
 class AdminProjectCard extends Component {
@@ -20,7 +20,7 @@ class AdminProjectCard extends Component {
         })
     }
 
-    handleUpdate = () => {
+    closeEditor = () => {
         this.setState({
             editing: false
         })
@@ -29,29 +29,27 @@ class AdminProjectCard extends Component {
     renderCard = () => {
         const { id } = this.props
         return (
-            <div className="card">
-                <div className="card-body">
-                    <CardContent {...this.props} />
-
-                    <button 
-                        className="btn btn-secondary float-right"
-                        onClick={() => this.handleDelete(id)}
-                    >Delete</button>
-
-                    <button 
-                        className="btn btn-primary float-right"
-                        onClick={() => this.handleEdit(id)}
-                    >Edit</button>
-                </div>
-            </div>
-          )
+            <>
+                <CardContent {...this.props} />
+                <button 
+                    className="btn btn-secondary float-right"
+                    onClick={() => this.handleDelete(id)}
+                >Delete</button>
+                <button 
+                    className="btn btn-primary float-right"
+                    onClick={() => this.handleEdit(id)}
+                >Edit</button>
+            </>
+        )
     }
 
     render() {
       return (
-          <>
-            {this.state.editing ? <ProjectInput editing={this.props} handleUpdate={this.handleUpdate} /> : this.renderCard()}
-          </>
+            <div className="card">
+                <div className="card-body">
+                    {this.state.editing ? <EditProject editing={this.props} closeEditor={this.closeEditor} /> : this.renderCard()}
+                </div>
+            </div>
       )
     }
 
