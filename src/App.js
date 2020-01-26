@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Dashboard from './components/Dashboard'
+import NavContainer from './containers/NavContainer'
 import Home from './components/Home'
 import ProjectsContainer from './containers/ProjectsContainer'
 import About from './components/About'
@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Router>
           <div className="app">
-            <Dashboard />
+            <NavContainer />
           </div>
 
         <Route exact path="/" component={Home} />
