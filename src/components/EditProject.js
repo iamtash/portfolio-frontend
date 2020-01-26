@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { editProject } from '../actions/projects'
 import ProjectForm from './ProjectForm'
+import { Button, ButtonGroup } from 'react-bootstrap'
 
 class EditProject extends Component {
     constructor(props) {
@@ -26,9 +27,11 @@ class EditProject extends Component {
             <div className="container">      
                 <h4>Edit Project</h4>
                 <ProjectForm {...this.state} handleChange={this.handleChange} />
-                
-                <button className="btn btn-primary" onClick={this.handleSubmit}>Update</button>
-                <button className="btn btn-secondary" onClick={this.props.closeEditor}>Cancel</button>
+
+                <ButtonGroup>
+                    <Button variant="primary" onClick={this.handleSubmit}>Update</Button>
+                    <Button variant="secondary" onClick={this.props.closeEditor}>Cancel</Button>
+                </ButtonGroup>
                 
             </div>            
         )
