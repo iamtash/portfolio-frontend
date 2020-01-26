@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 
-const CardContent = ({ id, title, description, githubUrl, demoUrl, likes, buttons }) => {
+const CardContent = ({ title, description, githubUrl, demoUrl, likes, buttons }) => {
     return (
         <>
             <Card>
@@ -13,9 +13,10 @@ const CardContent = ({ id, title, description, githubUrl, demoUrl, likes, button
                     <Card.Link href={githubUrl}>Github</Card.Link>
                     <Card.Link href={demoUrl}>Demo</Card.Link>
                     {buttons}
-                     <Card.Text className="small">Likes: {likes}</Card.Text>
+                        <Card.Text className="small">Likes: {likes}</Card.Text>
                 </Card.Footer>
             </Card>
+            <br />
         </>
     )
 }
