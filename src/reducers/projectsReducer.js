@@ -21,12 +21,12 @@ export default function projectsReducer(
                 return {
                     ...state,
                     projects: [...state.projects, action.project],
-                    requesting: state.requesting
+                    requesting: false
                 }
             case 'LIKE_PROJECT':
                 return {
                     ...state,
-                    requesting: state.requesting,
+                    requesting: false,
                     projects: state.projects.map(project => {
                         if (project.id === action.project.id) {
                             return {
@@ -39,7 +39,7 @@ export default function projectsReducer(
             case 'DELETE_PROJECT':
                 return {
                     ...state,
-                    requesting: state.requesting,
+                    requesting: false,
                     projects: state.projects.filter(project => {
                         return project.id !== action.id
                     })
@@ -47,10 +47,17 @@ export default function projectsReducer(
             case 'EDIT_PROJECT':
                 return {
                     ...state,
-                    requesting: state.requesting,
+                    requesting: false,
                     projects: state.projects.map(project => {
                         if (project.id === action.project.id) {
-                            return action.project
+                            console.log('reducer', {
+                                ...project,
+                                ...action.project
+                            })
+                            return {
+                                ...project,
+                                ...action.project
+                            }
                         } else return project
                     })
                 }
