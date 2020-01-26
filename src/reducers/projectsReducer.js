@@ -21,7 +21,7 @@ export default function projectsReducer(
                 return {
                     ...state,
                     projects: [...state.projects, action.project],
-                    requesting: false
+                    requesting: state.requesting
                 }
             case 'LIKE_PROJECT':
                 return {
@@ -39,7 +39,7 @@ export default function projectsReducer(
             case 'DELETE_PROJECT':
                 return {
                     ...state,
-                    requesting: false,
+                    requesting: state.requesting,
                     projects: state.projects.filter(project => {
                         return project.id !== action.id
                     })
@@ -47,13 +47,9 @@ export default function projectsReducer(
             case 'EDIT_PROJECT':
                 return {
                     ...state,
-                    requesting: false,
+                    requesting: state.requesting,
                     projects: state.projects.map(project => {
                         if (project.id === action.project.id) {
-                            console.log('reducer', {
-                                ...project,
-                                ...action.project
-                            })
                             return {
                                 ...project,
                                 ...action.project
