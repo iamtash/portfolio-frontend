@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { deleteProject } from '../actions/projects'
 import EditProject from './EditProject'
 import CardContent from './CardContent'
-import { Card } from 'react-bootstrap'
+import { ButtonGroup, Button, Card } from 'react-bootstrap'
 
 class AdminProjectCard extends Component {
 
@@ -11,8 +11,8 @@ class AdminProjectCard extends Component {
         editing: false
     }
 
-    handleDelete = id => {
-        this.props.deleteProject(id)
+    handleDelete = () => {
+        this.props.deleteProject(this.props.id)
     }
 
     handleEdit = () => {
@@ -29,40 +29,33 @@ class AdminProjectCard extends Component {
 
     buttons = (
         <>
-            <button 
-                className="btn btn-secondary float-right"
-                onClick={() => this.handleDelete(this.props.id)}
-            >Delete</button>
-            <button 
-                className="btn btn-primary float-right"
-                onClick={() => this.handleEdit(this.props.id)}
-            >Edit</button>
+            <ButtonGroup className="float-right">
+                <Button variant="primary" onClick={this.handleEdit}>Edit</Button>
+                <Button variant="secondary" onClick={this.handleDelete}>Delete</Button>
+            </ButtonGroup>
         </>
     )
 
 
-    card = (
-        <>
-            <CardContent {...this.props} buttons={this.buttons} />
-            <br />
-        </>
-    )
+    card = () => <><CardContent {...this.props} buttons={this.buttons} /></>
 
-    editor = (
-        <>
-            <Card>
-                <Card.Body>
-                    <EditProject editing={this.props} closeEditor={this.closeEditor} /> 
-                </Card.Body>
-            </Card>
-            <br />
-        </>
-    )
+    editor = () => {
+        return (
+            <>
+                <Card>
+                    <Card.Body>
+                        <EditProject editing={this.props} closeEditor={this.closeEditor} /> 
+                    </Card.Body>
+                </Card>
+                <br />
+            </>
+        )
+    }
 
     render() {
       return (
             <>
-                {this.state.editing ? this.editor : this.card}
+                {this.state.editing ? this.editor() : this.card()}
             </>
       )
     }
