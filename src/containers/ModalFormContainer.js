@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ModalForm from '../components/Modal'
+import ModalForm from '../components/ModalForm'
 import { Button } from 'react-bootstrap'
 
 class ModalFormContainer extends Component {
